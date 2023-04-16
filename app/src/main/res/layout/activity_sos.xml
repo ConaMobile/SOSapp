@@ -7,9 +7,5 @@
     android:orientation="vertical"
     tools:context=".ui.SosActivity">
 
-    <com.google.android.gms.maps.MapView
-        android:id="@+id/mapView"
-        android:layout_width="300dp"
-        android:layout_height="300dp" />
 
 </LinearLayout>
