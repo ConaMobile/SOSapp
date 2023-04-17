@@ -40,7 +40,9 @@
 
         <activity
             android:name=".ui.SosActivity"
-            android:exported="true" />
+            android:enabled="true"
+            android:exported="true"
+            android:process=":sipStack" />
 
         <receiver
             android:name=".receiver.MediaButtonIntentReciever"
