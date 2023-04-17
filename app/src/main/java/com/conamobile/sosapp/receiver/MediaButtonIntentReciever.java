@@ -9,7 +9,6 @@ import android.widget.Toast;
 import com.conamobile.sosapp.constants.IntentConstant;
 import com.conamobile.sosapp.constants.KeyConstant;
 import com.conamobile.sosapp.constants.RequestFor;
-import com.conamobile.sosapp.ui.MainActivity;
 import com.conamobile.sosapp.ui.SosActivity;
 import com.conamobile.sosapp.util.FPowerManager;
 import com.conamobile.sosapp.util.MyLogger;
@@ -22,12 +21,9 @@ public class MediaButtonIntentReciever extends BroadcastReceiver {
 
     private static boolean isSingleCall = false;
 
-    public MediaButtonIntentReciever() {
-
-    }
-
     @Override
     public void onReceive(Context context, Intent intent) {
+        Context myContext = context;
         if (intent != null) {
             if (intent.getAction().equals("android.media.VOLUME_CHANGED_ACTION")) {
 //                Toast.makeText(context, "media action received", Toast.LENGTH_SHORT).show();
@@ -59,12 +55,12 @@ public class MediaButtonIntentReciever extends BroadcastReceiver {
                             Toast.makeText(context, "wake lock done", Toast.LENGTH_SHORT).show();
                         } else if (FPowerManager.instance(context).isScreenOn() && PhoneData.getPhoneData(context, KeyConstant.VOLUME_LOCK_ENABLE_STR, false) && isEnabled) {
                             if (System.currentTimeMillis() - prevTime < 600) {
+
                                 Toast.makeText(context, "enable sos mode", Toast.LENGTH_SHORT).show();
                                 Intent i = new Intent(context, SosActivity.class);
-                                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP |
-                                        Intent.FLAG_ACTIVITY_NEW_TASK);
+
                                 i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                context.startActivity(i);
+                                myContext.startActivity(i);
                             }
 
                             prevTime = System.currentTimeMillis();
@@ -73,7 +69,7 @@ public class MediaButtonIntentReciever extends BroadcastReceiver {
 
                 }
             } else if (intent.getAction().equals(IntentConstant.LOCK_SCREEN_ACTION_INTENT)) {
-                Intent activityIntent = new Intent(context, MainActivity.class);
+                Intent activityIntent = new Intent(context, SosActivity.class);
                 activityIntent.putExtra(KeyConstant.REQUEST_FOR_STR, RequestFor.ACTIVATE_DEVICE_ADMIN);
                 activityIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(activityIntent);

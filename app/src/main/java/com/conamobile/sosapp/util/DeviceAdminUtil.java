@@ -37,6 +37,8 @@ public class DeviceAdminUtil {
             try {
                 final Intent intent = new Intent();
                 intent.setComponent(new ComponentName("com.android.settings", "com.android.settings.DeviceAdminAdd"));
+                intent.setComponent(new ComponentName("com.miui.securitycenter", "com.miui.permcenter.autostart.AutoStartManagementActivity"));
+                intent.setComponent(new ComponentName("com.vivo.permissionmanager", "com.vivo.permissionmanager.activity.BgStartUpManagerActivity"));
                 intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, VApp.mAdminName);
                 activity.startActivity(intent);
             } catch (Exception e) {

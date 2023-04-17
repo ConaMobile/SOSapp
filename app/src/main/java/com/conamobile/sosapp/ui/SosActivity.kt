@@ -21,7 +21,7 @@ class SosActivity : AppCompatActivity() {
         initViews()
     }
 
-    @SuppressLint("MissingPermission")
+    @SuppressLint("MissingPermission", "SetTextI18n")
     private fun initViews() {
         val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         val criteria = Criteria()
@@ -39,7 +39,7 @@ class SosActivity : AppCompatActivity() {
         if (location != null) {
             lat = location.latitude
             lng = location.longitude
-            Log.d("@@@", "lat: $lat \n lng: $lng")
+            binding.latLng.text = "latitude: $lat\nlongitude: $lng"
             Toast.makeText(this, "Your location lat and lng: $lat, $lng ", Toast.LENGTH_LONG).show()
         } else Toast.makeText(
             this,

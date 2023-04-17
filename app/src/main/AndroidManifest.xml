@@ -12,6 +12,10 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="oppo.permission.OPPO_COMPONENT_SAFE" />
     <uses-permission android:name="com.huawei.permission.external_app_settings.USE_COMPONENT" />
+    <uses-permission
+        android:name="android.permission.START_FOREGROUND_SERVICES_FROM_BACKGROUND"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
         android:name=".ui.VApp"
@@ -40,7 +44,8 @@
             android:name=".receiver.MediaButtonIntentReciever"
             android:enabled="true"
             android:exported="true"
-            android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
+            android:permission="android.permission.RECEIVE_BOOT_COMPLETED"
+            android:process=":sipStack">
             <intent-filter>
                 <action android:name="android.media.VOLUME_CHANGED_ACTION" />
                 <action android:name="LOCK_SCREEN_ACTION_INTENT" />
@@ -65,6 +70,8 @@
                 <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
             </intent-filter>
         </receiver>
+
+        <service android:name=".receiver.NewService" />
 
     </application>
 
