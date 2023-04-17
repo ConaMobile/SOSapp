@@ -71,7 +71,6 @@
             </intent-filter>
         </receiver>
 
-        <service android:name=".receiver.NewService" />
 
     </application>
 

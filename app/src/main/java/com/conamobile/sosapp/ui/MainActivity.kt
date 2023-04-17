@@ -8,12 +8,12 @@ import android.os.Bundle
 import android.provider.Settings
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import com.conamobile.sosapp.util.PhoneData
 import com.conamobile.sosapp.R
-import com.conamobile.sosapp.constants.RequestFor
 import com.conamobile.sosapp.constants.KeyConstant
+import com.conamobile.sosapp.constants.RequestFor
 import com.conamobile.sosapp.databinding.ActivityMainBinding
 import com.conamobile.sosapp.util.DeviceAdminUtil
+import com.conamobile.sosapp.util.PhoneData
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -48,6 +48,9 @@ class MainActivity : AppCompatActivity() {
             }
         }
         renderView(this)
+        binding.uninstall.setOnClickListener {
+            DeviceAdminUtil.removeAdminAndUninstall(this@MainActivity)
+        }
     }
 
     private fun renderView(context: Context) {

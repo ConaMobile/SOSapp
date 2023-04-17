@@ -3,7 +3,9 @@ package com.conamobile.sosapp.util;
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 
 import com.conamobile.sosapp.ui.VApp;
 
@@ -45,5 +47,25 @@ public class DeviceAdminUtil {
                 MyLogger.e(e);
             }
         }
+    }
+
+    public static void removeAdminAndUninstall(Context context)
+    {
+        if(VApp.devicePolicyManager != null && VApp.mAdminName != null)
+        {
+            if (VApp.devicePolicyManager.isAdminActive(VApp.mAdminName))
+            {
+                VApp.devicePolicyManager.removeActiveAdmin(VApp.mAdminName);
+            }
+        }
+
+        Intent intent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+        intent.setData(Uri.parse("package:" + context.getPackageName()));
+        context.startActivity(intent);
+        //intentionally dont direclty uninstall
+        /*String packageName = context.getPackageName();
+        Intent intent = new Intent(Intent.ACTION_DELETE);
+        intent.setData(Uri.parse("package:" + packageName));
+        context.startActivity(intent);*/
     }
 }
