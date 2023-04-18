@@ -5,18 +5,10 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".ui.SosActivity">
+    tools:context=".ui.SplashActivity">
 
-    <TextView
-        android:id="@+id/latLng"
+    <ProgressBar
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="location" />
-
-    <Button
-        android:id="@+id/exit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Chiqish" />
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

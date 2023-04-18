@@ -3,7 +3,6 @@ package com.conamobile.sosapp.ui
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import androidx.appcompat.app.AppCompatActivity
@@ -51,6 +50,11 @@ class MainActivity : AppCompatActivity() {
         binding.uninstall.setOnClickListener {
             DeviceAdminUtil.removeAdminAndUninstall(this@MainActivity)
         }
+
+        binding.changeUserInfo.setOnClickListener {
+            finish()
+            startActivity(Intent(this, LoginActivity::class.java))
+        }
     }
 
     private fun renderView(context: Context) {
@@ -79,16 +83,14 @@ class MainActivity : AppCompatActivity() {
 
     private fun checkDrawOverlayPermission(): Boolean {
         var isPermission = true
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (!Settings.canDrawOverlays(this)) {
-                val intent = Intent(
-                    Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse(
-                        "package:$packageName"
-                    )
+        if (!Settings.canDrawOverlays(this)) {
+            val intent = Intent(
+                Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse(
+                    "package:$packageName"
                 )
-                startActivityForResult(intent, RequestFor.REQUEST_FLOATING_PERMISSION)
-                isPermission = false
-            }
+            )
+            startActivityForResult(intent, RequestFor.REQUEST_FLOATING_PERMISSION)
+            isPermission = false
         }
         return isPermission
     }
